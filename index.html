@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Limonun Olim mi</title>
+<style>
+  :root{
+    --bg: #0f172a;
+    --card: #0b1220;
+    --accent: #ef476f;
+    --text: #e6eef8;
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(239,71,111,0.08), transparent),
+                radial-gradient(900px 400px at 90% 90%, rgba(14,165,233,0.04), transparent),
+                var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .card{
+    width: min(720px, 92vw);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:20px;
+    padding:36px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    text-align:center;
+    backdrop-filter: blur(6px);
+  }
+
+  h1{
+    margin:0 0 12px;
+    font-size: clamp(20px, 3.2vw, 30px);
+    letter-spacing: 0.2px;
+  }
+  p.lead{
+    margin:0 0 26px;
+    color: #bcd4f6;
+  }
+
+  .buttons{
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+
+  button.btn{
+    border:0;
+    cursor:pointer;
+    padding:14px 28px;
+    font-size:18px;
+    border-radius:12px;
+    transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 200ms, opacity 200ms;
+    box-shadow: 0 8px 20px rgba(2,6,23,0.45);
+    user-select:none;
+  }
+
+  #yesBtn{
+    background: linear-gradient(90deg, #ff8fab, var(--accent));
+    color:white;
+    transform-origin:center;
+  }
+
+  #noBtn{
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.14);
+    color:var(--text);
+  }
+
+  .muted{
+    opacity:0.6;
+    font-size:14px;
+    margin-top:18px;
+    color:#9fb3dd;
+  }
+
+  .footer{
+    margin-top:18px;
+    font-size:13px;
+    color:#8da6d6;
+  }
+
+  /* küçük ekranlarda butonları daha büyük yap */
+  @media (max-width:420px){
+    button.btn{ padding:12px 20px; font-size:16px; }
+  }
+</style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="q">
+    <h1 id="q">Limonun olim mi?</h1>
+    
+
+    <div class="buttons" id="buttons">
+      <button id="yesBtn" class="btn" aria-pressed="false">Evt ASKIMMMMMMMM</button>
+      <button id="noBtn" class="btn" aria-pressed="false">3 sene sonra mı aklına geldi yrrm</button>
+    </div>
+
+    <div class="muted" id="hint">GÜZELLER GÜZELİ DORİMM </div>
+    <div class="footer" id="footer"></div>
+  </main>
+
+<script>
+(function(){
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn  = document.getElementById('noBtn');
+  const q = document.getElementById('q');
+  const hint = document.getElementById('hint');
+  const footer = document.getElementById('footer');
+
+  let noCount = 0;
+  const maxNoAttempts = 7; // kaç kere "Hayır" dedikten sonra Hayır butonunu imkansız yapacağız
+  const growPerNo = 0.5;  // her "Hayır"ta Evet butonunun büyüme miktarı (scale artışı)
+  const maxScale = 4.0;    // görsel limit (çok fazla büyümeyi engellemek için)
+
+  // Başlangıç ayarları: küçük bir giriş animasyonu
+  yesBtn.style.transform = 'scale(1)';
+  yesBtn.style.transition = 'transform 320ms cubic-bezier(.2,.9,.3,1), box-shadow 200ms';
+  noBtn.style.transition = 'transform 200ms ease, opacity 200ms ease';
+
+  function askAgain(){
+    // Soru metnini hafifçe değiştir (oyunsu)
+    const suffixes = [
+      'ASKIM OLİM İSTİON SEN DE NAZ YAPMA',
+      'SENSİZ YAPAMAM Kİ',
+      'bir daha soruyorum limonun olcam.',
+      'ASKIM !',
+      'Kacısın yok ki'
+    ];
+    const s = suffixes[ noCount % suffixes.length ];
+    q.textContent = 'Limonun Olim mi ' + s;
+  }
+
+  noBtn.addEventListener('click', (e)=>{
+    noCount++;
+    // Evet butonunu büyüt
+    let newScale = 1 + (noCount * growPerNo);
+    if (newScale > maxScale) newScale = maxScale;
+    yesBtn.style.transform = `scale(${newScale})`;
+    yesBtn.style.boxShadow = `0 14px ${22 + noCount*6}px rgba(239,71,111,0.16)`;
+
+    // Hafif titreşim/gerileme efekti no butonuna
+    noBtn.style.transform = 'translateY(-6px)';
+    setTimeout(()=> noBtn.style.transform = '', 140);
+
+    // Soruyu tekrar sor
+    askAgain();
+
+    
+
+    // Eğer çok denediyse "Hayır" butonunu zorlaştır
+    if(noCount >= Math.floor(maxNoAttempts/2) && noCount < maxNoAttempts){
+      // hayır butonunu rastgele kaydır (küçük miktar)
+      const x = (Math.random()-0.5) * 120; // -60..60 px
+      const y = (Math.random()-0.5) * 30;  // -15..15 px
+      noBtn.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+    }
+
+    // Son aşama: no butonunu devre dışı bırak
+    if(noCount >= maxNoAttempts){
+      noBtn.disabled = true;
+      noBtn.style.opacity = '0.18';
+      noBtn.style.cursor = 'not-allowed';
+      noBtn.style.transform = 'translateY(0)';
+      hint.textContent = 'hayir yok.';
+      footer.textContent = 'evt dicen.';
+      // Küçük mizaçlı uyarı
+      setTimeout(()=> {
+        q.textContent = 'ASKİM DÜRÜST OLSANA';
+      }, 700);
+    }
+  });
+
+  yesBtn.addEventListener('click', ()=>{
+    // İki butonu normal boyutuna döndür
+    yesBtn.disabled = true;
+    noBtn.disabled = true;
+
+    // Evet butonunu normal boyut ve shadow’a resetle
+    yesBtn.style.transition = 'transform 400ms ease, box-shadow 400ms ease';
+    yesBtn.style.transform = 'scale(1)';
+    yesBtn.style.boxShadow = '0 8px 20px rgba(2,6,23,0.45)';
+    
+    // No butonunu da normale döndür
+    noBtn.style.transform = 'translate(0,0)';
+    noBtn.style.opacity = '1';
+
+    // Küçük gecikmeyle mesajları göster
+    setTimeout(()=>{
+        q.textContent = 'çok seviyorum AŞKKAAAM 💖';
+        hint.textContent = 'harika bi seçim yaptiiin :)';
+    }, 300);
+
+    // Küçük konfeti efekti (aynı kalabilir)
+    for(let i=0;i<18;i++){
+      const span = document.createElement('span');
+      span.textContent = '✨';
+      span.style.position='fixed';
+      span.style.left = (50 + (Math.random()-0.5)*60) + '%';
+      span.style.top  = (40 + Math.random()*30) + '%';
+      span.style.fontSize = (8 + Math.random()*22) + 'px';
+      span.style.opacity = '0.9';
+      span.style.pointerEvents = 'none';
+      span.style.transition = 'transform 1200ms ease, opacity 1200ms ease';
+      document.body.appendChild(span);
+      setTimeout(()=> span.style.transform = `translateY(${80 + Math.random()*60}px) rotate(${Math.random()*360}deg)`, 20);
+      setTimeout(()=> span.style.opacity = '0', 1200);
+      setTimeout(()=> span.remove(), 1500);
+    }
+});
+
+  // Klavye erişimi: Enter ile Evet, Esc ile Hayır (eğlenceli)
+  window.addEventListener('keydown', (ev)=>{
+    if(ev.key === 'Enter') { yesBtn.click(); }
+    if(ev.key === 'Escape') { if(!noBtn.disabled) noBtn.click(); }
+  });
+
+  // Başlangıçta küçük bounce animasyonu
+  setTimeout(()=> {
+    yesBtn.style.transform = 'scale(1.06)';
+    setTimeout(()=> yesBtn.style.transform = 'scale(1)', 260);
+  }, 450);
+
+})();
+</script>
+</body>
+</html>
