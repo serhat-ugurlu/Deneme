@@ -1,238 +1,215 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YKS Koçluk | Başarıya Giden Net Yol</title>
+  <meta name="description" content="YKS koçluk hizmeti: kişiye özel çalışma planı, deneme analizi, haftalık takip ve motivasyon. Hemen ücretsiz tanışma görüşmesi ayırtın."/>
+  <meta property="og:title" content="YKS Koçluk | Başarıya Giden Net Yol" />
+  <meta property="og:description" content="Kişiye özel YKS koçluğu. Hedefe uygun plan, deneme analizi, haftalık takip." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f172a; --card:#0b1220; --muted:#94a3b8; --text:#e6eef8; --accent:#0ea5e9; --accent-2:#22d3ee; --ok:#22c55e; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:
+      radial-gradient(900px 500px at 90% 10%, rgba(34,211,238,0.08), transparent),
+      radial-gradient(900px 500px at 10% 90%, rgba(14,165,233,0.08), transparent), var(--bg); color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(45deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white;font-weight:800}
+    .brand span{font-weight:700;letter-spacing:.2px}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;font-weight:600}
+    .btn.outline{background:transparent;border:1px solid rgba(255,255,255,.15)}
+    .hero{display:grid;grid-template-columns:1.15fr 1fr;gap:30px;padding:40px 0}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; backdrop-filter: blur(6px);}
+    h1{font-size:40px;line-height:1.1;margin:0 0 14px}
+    .lead{color:var(--muted);font-size:18px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+    .chip{border:1px solid rgba(255,255,255,.12);padding:8px 12px;border-radius:999px;color:#cbd5e1;font-size:14px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .mock{aspect-ratio:4/3;background:url('https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1200&auto=format&fit=crop') center/cover;border-radius:16px;border:1px solid rgba(255,255,255,.08)}
+    
+    .section{padding:40px 0}
+    .section h2{font-size:28px;margin:0 0 16px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .kpi{display:flex;gap:12px;align-items:center}
+    .kpi .dot{width:10px;height:10px;border-radius:999px;background:var(--ok)}
 
-<style>
-  :root{
-    --bg: #0f172a;
-    --card: #0b1220;
-    --accent: #ef476f;
-    --text: #e6eef8;
-  }
-  html,body{
-    height:100%;
-    margin:0;
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(239,71,111,0.08), transparent),
-                radial-gradient(900px 400px at 90% 90%, rgba(14,165,233,0.04), transparent),
-                var(--bg);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .price-card{padding:20px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03))}
+    .price{font-size:36px;font-weight:800}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);font-size:12px;letter-spacing:.3px}
+    .ul{margin:12px 0 0;padding:0;list-style:none}
+    .ul li{display:flex;gap:10px;align-items:flex-start;margin:8px 0;color:#cbd5e1}
+    .ul li:before{content:'✓';color:var(--ok);font-weight:700}
 
-  .card{
-    width: min(720px, 92vw);
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border-radius:20px;
-    padding:36px;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-    text-align:center;
-    backdrop-filter: blur(6px);
-  }
+    .testis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .q{color:#cbd5e1}
 
-  h1{
-    margin:0 0 12px;
-    font-size: clamp(20px, 3.2vw, 30px);
-    letter-spacing: 0.2px;
-  }
-  p.lead{
-    margin:0 0 26px;
-    color: #bcd4f6;
-  }
+    form{display:grid;gap:12px}
+    input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;background:#0b1220;border:1px solid rgba(255,255,255,.12);color:#e6eef8}
+    label{font-size:14px;color:#cbd5e1}
 
-  .buttons{
-    display:flex;
-    gap:18px;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-  }
+    .faq details{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;background:#0b1220}
+    .faq summary{cursor:pointer;font-weight:600}
 
-  button.btn{
-    border:0;
-    cursor:pointer;
-    padding:14px 28px;
-    font-size:18px;
-    border-radius:12px;
-    transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 200ms, opacity 200ms;
-    box-shadow: 0 8px 20px rgba(2,6,23,0.45);
-    user-select:none;
-  }
+    .footer{padding:28px 0;color:#94a3b8;font-size:14px;border-top:1px solid rgba(255,255,255,.08);margin-top:30px}
+    footer a{color:#94a3b8}
 
-  #yesBtn{
-    background: linear-gradient(90deg, #ff8fab, var(--accent));
-    color:white;
-    transform-origin:center;
-  }
-
-  #noBtn{
-    background: transparent;
-    border: 2px solid rgba(255,255,255,0.14);
-    color:var(--text);
-  }
-
-  .muted{
-    opacity:0.6;
-    font-size:14px;
-    margin-top:18px;
-    color:#9fb3dd;
-  }
-
-  .footer{
-    margin-top:18px;
-    font-size:13px;
-    color:#8da6d6;
-  }
-
-  /* küçük ekranlarda butonları daha büyük yap */
-  @media (max-width:420px){
-    button.btn{ padding:12px 20px; font-size:16px; }
-  }
-</style>
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      .grid, .pricing, .testis{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-  <main class="card" role="main" aria-labelledby="q">
-    <h1 id="q">Limonun olim mi?</h1>
-    
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo">YK</div>
+        <span>YKS Koçluk</span>
+      </div>
+      <div class="nav-cta">
+        <a class="btn outline" href="#iletisim">Ücretsiz Tanışma</a>
+      </div>
+    </nav>
 
-    <div class="buttons" id="buttons">
-      <button id="yesBtn" class="btn" aria-pressed="false">Evt ASKIMMMMMMMM</button>
-      <button id="noBtn" class="btn" aria-pressed="false">3 sene sonra mı aklına geldi yrrm</button>
-    </div>
+    <header class="hero">
+      <div class="card">
+        <h1>Hedefe Göre <span style="background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent">YKS Koçluğu</span></h1>
+        <p class="lead">Kişiye özel haftalık plan, deneme analizi ve disiplinli takip ile net artışı. İlk görüşme ücretsiz, WhatsApp üzerinden hızlı iletişim.</p>
+        <div class="chips">
+          <div class="chip">AYT Sayısal</div>
+          <div class="chip">EA / Sözel</div>
+          <div class="chip">TYT Temel</div>
+          <div class="chip">Deneme Analizi</div>
+          <div class="chip">Motivasyon – Raporlama</div>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="https://wa.me/905555555555?text=Merhaba,%20YKS%20koçluğu%20için%20tanışma%20görüşmesi%20almak%20istiyorum." target="_blank" rel="noopener">WhatsApp’tan Yaz</a>
+          <a class="btn outline" href="#paketler">Paketleri Gör</a>
+        </div>
+        <div style="margin-top:16px" class="kpi"><span class="dot"></span><small>Son 12 ayda 100+ öğrenci ile çalışma</small></div>
+      </div>
+      <div class="mock" aria-label="öğrenci çalışma masası görseli"></div>
+    </header>
 
-    <div class="muted" id="hint">GÜZELLER GÜZELİ DORİMM </div>
-    <div class="footer" id="footer"></div>
-  </main>
+    <section class="section" id="neden">
+      <h2>Neden Benimle Çalışmalısınız?</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Net Odaklı Plan</strong>
+          <p class="q">Hedef bölüme uygun, haftalık güncellenen çalışma programı ve ders/konu önceliklendirme.</p>
+        </div>
+        <div class="card">
+          <strong>Deneme Analizi</strong>
+          <p class="q">Yanlış türü (bilgi/yorum/acele) ayrımı ve soru seçim stratejisi ile net kaybını azaltma.</p>
+        </div>
+        <div class="card">
+          <strong>Takip & Hesap Verebilirlik</strong>
+          <p class="q">Günlük/haftalık raporlama, mini geri bildirimler ve motivasyon koçluğu.</p>
+        </div>
+      </div>
+    </section>
 
-<script>
-(function(){
-  const yesBtn = document.getElementById('yesBtn');
-  const noBtn  = document.getElementById('noBtn');
-  const q = document.getElementById('q');
-  const hint = document.getElementById('hint');
-  const footer = document.getElementById('footer');
+    <section class="section" id="paketler">
+      <h2>Paketler</h2>
+      <div class="pricing">
+        <div class="price-card">
+          <div class="pill">Yeni Başlayan</div>
+          <div class="price">₺1.490/ay</div>
+          <ul class="ul">
+            <li>Haftalık plan + hedefleme</li>
+            <li>Aylık 2 deneme analizi</li>
+            <li>Haftada 1 görüşme (30 dk)</li>
+            <li>WhatsApp’ta mesai içi yanıt</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn" href="#iletisim">Başvur</a></div>
+        </div>
+        <div class="price-card" style="border-color:rgba(34,197,94,.35)">
+          <div class="pill">Standart (En Popüler)</div>
+          <div class="price">₺2.490/ay</div>
+          <ul class="ul">
+            <li>Haftalık plan + konu takibi</li>
+            <li>Her hafta deneme analizi</li>
+            <li>Haftada 1 görüşme (45 dk)</li>
+            <li>WhatsApp’ta hızlı yanıt</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn" href="#iletisim">Başvur</a></div>
+        </div>
+        <div class="price-card">
+          <div class="pill" style="background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.35)">Yoğun Hazırlık</div>
+          <div class="price">₺3.990/ay</div>
+          <ul class="ul">
+            <li>Haftalık plan + günlük kontrol</li>
+            <li>TYT+AYT karma strateji</li>
+            <li>Haftada 2 görüşme (45 dk)</li>
+            <li>7/24 acil destek penceresi*</li>
+          </ul>
+          <small class="q">*Makul sürelerde</small>
+          <div style="margin-top:14px"><a class="btn" href="#iletisim">Başvur</a></div>
+        </div>
+      </div>
+    </section>
 
-  let noCount = 0;
-  const maxNoAttempts = 7; // kaç kere "Hayır" dedikten sonra Hayır butonunu imkansız yapacağız
-  const growPerNo = 0.5;  // her "Hayır"ta Evet butonunun büyüme miktarı (scale artışı)
-  const maxScale = 4.0;    // görsel limit (çok fazla büyümeyi engellemek için)
+    <section class="section" id="yorumlar">
+      <h2>Öğrenci Yorumları</h2>
+      <div class="testis">
+        <div class="card">
+          <em>“Denemelerde dağılıyordum. Soru seçimini öğrenince netlerim 12 arttı.”</em>
+          <p class="q">— AYT Sayısal, 2025</p>
+        </div>
+        <div class="card">
+          <em>“Her hafta plan revizyonu sayesinde motivasyonum hiç düşmedi.”</em>
+          <p class="q">— TYT, 2025</p>
+        </div>
+        <div class="card">
+          <em>“Yanlış analiziyle kritik hatalarımı gördüm, sınavda çok işime yaradı.”</em>
+          <p class="q">— Eşit Ağırlık, 2024</p>
+        </div>
+      </div>
+    </section>
 
-  // Başlangıç ayarları: küçük bir giriş animasyonu
-  yesBtn.style.transform = 'scale(1)';
-  yesBtn.style.transition = 'transform 320ms cubic-bezier(.2,.9,.3,1), box-shadow 200ms';
-  noBtn.style.transition = 'transform 200ms ease, opacity 200ms ease';
+    <section class="section" id="iletisim">
+      <h2>Ücretsiz Tanışma Görüşmesi</h2>
+      <div class="grid">
+        <div class="card">
+          <form action="https://formspree.io/f/xxxxxx" method="POST">
+            <label>Ad Soyad<input name="adsoyad" required placeholder="Adınız Soyadınız"></label>
+            <label>Telefon (WhatsApp)<input name="telefon" required placeholder="05xx xxx xx xx"></label>
+            <label>Hedef (Bölüm/Net)<input name="hedef" placeholder="Örn. Bilgisayar Müh., 80 TYT"></label>
+            <label>Sınıf/Alan<select name="alan"><option>12. Sınıf</option><option>Mezun</option><option>11. Sınıf</option></select></label>
+            <label>Mesajınız<textarea name="mesaj" rows="4" placeholder="Kısaca ihtiyaçlarınızı yazın"></textarea></label>
+            <button class="btn" type="submit">Başvuru Gönder</button>
+            <p class="q">veya <a href="https://wa.me/905555555555" target="_blank" rel="noopener">WhatsApp’tan yazın</a></p>
+          </form>
+        </div>
+        <div class="card">
+          <strong>Hızlı İletişim</strong>
+          <p class="q">WhatsApp: <a href="https://wa.me/905555555555" target="_blank" rel="noopener">+90 555 555 55 55</a></p>
+          <p class="q">E-posta: <a href="mailto:iletisim@ykskocluk.com">iletisim@ykskocluk.com</a></p>
+          <strong>Sık Sorulanlar</strong>
+          <div class="faq" style="display:grid;gap:10px;margin-top:10px">
+            <details><summary>Haftalık planı nasıl hazırlıyorsunuz?</summary><p>Mevcut seviyeniz, netleriniz ve hedef bölümünüze göre haftalık ders/konu/dk dağılımı çıkarıyorum ve haftalık revize ediyorum.</p></details>
+            <details><summary>Deneme analizi nedir?</summary><p>Doğru/yanlış nedenlerini sınıflandırıp soru türü, süre yönetimi ve konu tekrarı önerileri çıkarırım.</p></details>
+            <details><summary>Çalışma düzenim çok bozuk, olur mu?</summary><p>Evet. Önce sürdürülebilir mini hedefler kurup alışkanlıkları birlikte inşa ediyoruz.</p></details>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  function askAgain(){
-    // Soru metnini hafifçe değiştir (oyunsu)
-    const suffixes = [
-      'ASKIM OLİM İSTİON SEN DE NAZ YAPMA',
-      'SENSİZ YAPAMAM Kİ',
-      'bir daha soruyorum limonun olcam.',
-      'ASKIM !',
-      'Kacısın yok ki'
-    ];
-    const s = suffixes[ noCount % suffixes.length ];
-    q.textContent = 'Limonun Olim mi ' + s;
-  }
-
-  noBtn.addEventListener('click', (e)=>{
-    noCount++;
-    // Evet butonunu büyüt
-    let newScale = 1 + (noCount * growPerNo);
-    if (newScale > maxScale) newScale = maxScale;
-    yesBtn.style.transform = `scale(${newScale})`;
-    yesBtn.style.boxShadow = `0 14px ${22 + noCount*6}px rgba(239,71,111,0.16)`;
-
-    // Hafif titreşim/gerileme efekti no butonuna
-    noBtn.style.transform = 'translateY(-6px)';
-    setTimeout(()=> noBtn.style.transform = '', 140);
-
-    // Soruyu tekrar sor
-    askAgain();
-
-    
-
-    // Eğer çok denediyse "Hayır" butonunu zorlaştır
-    if(noCount >= Math.floor(maxNoAttempts/2) && noCount < maxNoAttempts){
-      // hayır butonunu rastgele kaydır (küçük miktar)
-      const x = (Math.random()-0.5) * 120; // -60..60 px
-      const y = (Math.random()-0.5) * 30;  // -15..15 px
-      noBtn.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
-    }
-
-    // Son aşama: no butonunu devre dışı bırak
-    if(noCount >= maxNoAttempts){
-      noBtn.disabled = true;
-      noBtn.style.opacity = '0.18';
-      noBtn.style.cursor = 'not-allowed';
-      noBtn.style.transform = 'translateY(0)';
-      hint.textContent = 'hayir yok.';
-      footer.textContent = 'evt dicen.';
-      // Küçük mizaçlı uyarı
-      setTimeout(()=> {
-        q.textContent = 'ASKİM DÜRÜST OLSANA';
-      }, 700);
-    }
-  });
-
-  yesBtn.addEventListener('click', ()=>{
-    // İki butonu normal boyutuna döndür
-    yesBtn.disabled = true;
-    noBtn.disabled = true;
-
-    // Evet butonunu normal boyut ve shadow’a resetle
-    yesBtn.style.transition = 'transform 400ms ease, box-shadow 400ms ease';
-    yesBtn.style.transform = 'scale(1)';
-    yesBtn.style.boxShadow = '0 8px 20px rgba(2,6,23,0.45)';
-    
-    // No butonunu da normale döndür
-    noBtn.style.transform = 'translate(0,0)';
-    noBtn.style.opacity = '1';
-
-    // Küçük gecikmeyle mesajları göster
-    setTimeout(()=>{
-        q.textContent = 'çok seviyorum AŞKKAAAM 💖';
-        hint.textContent = 'harika bi seçim yaptiiin :)';
-    }, 300);
-
-    // Küçük konfeti efekti (aynı kalabilir)
-    for(let i=0;i<18;i++){
-      const span = document.createElement('span');
-      span.textContent = '✨';
-      span.style.position='fixed';
-      span.style.left = (50 + (Math.random()-0.5)*60) + '%';
-      span.style.top  = (40 + Math.random()*30) + '%';
-      span.style.fontSize = (8 + Math.random()*22) + 'px';
-      span.style.opacity = '0.9';
-      span.style.pointerEvents = 'none';
-      span.style.transition = 'transform 1200ms ease, opacity 1200ms ease';
-      document.body.appendChild(span);
-      setTimeout(()=> span.style.transform = `translateY(${80 + Math.random()*60}px) rotate(${Math.random()*360}deg)`, 20);
-      setTimeout(()=> span.style.opacity = '0', 1200);
-      setTimeout(()=> span.remove(), 1500);
-    }
-});
-
-  // Klavye erişimi: Enter ile Evet, Esc ile Hayır (eğlenceli)
-  window.addEventListener('keydown', (ev)=>{
-    if(ev.key === 'Enter') { yesBtn.click(); }
-    if(ev.key === 'Escape') { if(!noBtn.disabled) noBtn.click(); }
-  });
-
-  // Başlangıçta küçük bounce animasyonu
-  setTimeout(()=> {
-    yesBtn.style.transform = 'scale(1.06)';
-    setTimeout(()=> yesBtn.style.transform = 'scale(1)', 260);
-  }, 450);
-
-})();
-</script>
+    <footer class="footer">
+      <div>© 2025 YKS Koçluk. Tüm hakları saklıdır. — <a href="#">KVKK & Aydınlatma Metni</a></div>
+    </footer>
+  </div>
 </body>
 </html>
-
