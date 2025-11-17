@@ -2,7 +2,7 @@ document.getElementById('princessButton').addEventListener('click', function() {
     const message = document.getElementById('celebrationMessage');
 
     // Buton metnini değiştir (isteğe bağlı)
-    this.textContent = 'Şenlendik!';
+    this.textContent = 'Şenlendik';
     this.disabled = true;
 
     // Mesajı göster
